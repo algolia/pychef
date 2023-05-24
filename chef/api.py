@@ -37,7 +37,7 @@ class UnknownRubyExpression(Exception):
     """Token exception for unprocessed Ruby expressions."""
 
 
-class ChefAPI(object):
+class ChefAPI:
     """The ChefAPI object is a wrapper for a single Chef server.
 
     .. admonition:: The API stack
@@ -199,12 +199,13 @@ class ChefAPI(object):
         request_headers.update(self.headers)
         request_headers.update(dict((k.lower(), v) for k, v in six.iteritems(headers)))
         request_headers['x-chef-version'] = self.version
+        request_headers['User-Agent'] = 'Chef/14.15.6'
         request_headers.update(auth_headers)
         try:
             response = self._request(method, self.url + path, data, dict(
                 (k.capitalize(), v) for k, v in six.iteritems(request_headers)))
         except requests.ConnectionError as e:
-            raise ChefServerError(e.message)
+            raise ChefServerError(e.message) from e
 
         if not response.ok:
             raise ChefServerError.from_error(response.reason, code=response.status_code)
