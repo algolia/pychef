@@ -46,16 +46,16 @@ copyright = u'2010-2012, Noah Kantrowitz'
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
-import pkg_resources
+from importlib.metadata import version as pkg_version
+from importlib.metadata import PackageNotFoundError
 try:
-    release = pkg_resources.get_distribution('PyChef').version
-except pkg_resources.DistributionNotFound:
-    print 'To build the documentation, The distribution information of PyChef'
-    print 'Has to be available.  Either install the package into your'
-    print 'development environment or run "setup.py develop" to setup the'
-    print 'metadata.  A virtualenv is recommended!'
+    release = pkg_version('PyChef')
+except PackageNotFoundError:
+    print('To build the documentation, The distribution information of PyChef')
+    print('Has to be available.  Either install the package into your')
+    print('development environment or run "setup.py develop" to setup the')
+    print('metadata.  A virtualenv is recommended!')
     sys.exit(1)
-del pkg_resources
 
 if 'dev' in release:
     release = release.split('dev')[0] + 'dev'

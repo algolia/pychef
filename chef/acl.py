@@ -1,4 +1,4 @@
-import pkg_resources
+import packaging.version
 from chef.api import ChefAPI
 from chef.exceptions import ChefObjectTypeError
 from chef.permissions import Permissions
@@ -96,7 +96,7 @@ class Acl(object):
     object_types = ["clients", "containers", "cookbooks", "data", "environments", "groups", "nodes", "roles"]
 
     """ ALC API available only in Chef server from version 12.0"""
-    version = pkg_resources.parse_version("12.0.0")
+    version = packaging.version.parse("12.0.0")
 
     def __init__(self, object_type, name, api, skip_load=False):
         self._check_object_type(object_type)
