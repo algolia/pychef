@@ -14,7 +14,7 @@ setup(
     long_description = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     license = 'Apache 2.0',
     keywords = '',
-    url = 'http://github.com/coderanger/pychef',
+    url = 'https://github.com/algolia/pychef',
     classifiers = [
         #'Development Status :: 1 - Planning',
         #'Development Status :: 2 - Pre-Alpha',
